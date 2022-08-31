@@ -13,7 +13,19 @@ config_version: 3.0
 # Datasources tell Great Expectations where your data lives and how to get it.
 # You can use the CLI command `great_expectations datasource new` to help you
 # add a new datasource. Read more at https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview
-datasources: {}
+datasources:
+  example_datasource:
+    module_name: great_expectations.datasource
+    class_name: Datasource
+    data_connectors:
+      default_runtime_data_connector_name:
+        batch_identifiers:
+          - default_identifier_name
+        module_name: great_expectations.datasource.data_connector
+        class_name: RuntimeDataConnector
+    execution_engine:
+      class_name: PandasExecutionEngine
+      module_name: great_expectations.execution_engine
 
 # This config file supports variable substitution which enables: 1) keeping
 # secrets out of source control & 2) environment-based configuration changes
@@ -99,6 +111,6 @@ data_docs_sites:
       class_name: DefaultSiteIndexBuilder
 
 anonymous_usage_statistics:
+  data_context_id: c626973c-a749-407c-824e-81e579db83ea
   enabled: true
-  data_context_id: fb38a528-a6ca-4f92-85ec-0d18aa45d67f
 notebooks:
